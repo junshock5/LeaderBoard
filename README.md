@@ -30,17 +30,17 @@ REST API 사양
 플레이어 모델은
 - long playerId
 - int mmr
-- 정수 순위
-- enum 계층
+- int rank
+- Tier tier
 
 계층 모델은 다음으로 구성됩니다.
-- CHALLENGER // 상위 100 명의 플레이어
-- 마스터, // 상위 1 % 플레이어
-- 다이아몬드, // 상위 5 % 플레이어
-- PLATINUM, // 상위 10 % 플레이어
-- 골드, // 상위 25 % 플레이어
-- SILVER, // 상위 65 % 플레이어
-- BROZNE, // 기타
+- CHALLENGER // top 100 players
+- MASTER, // top 1% players
+- DIAMOND, // top 5% players
+- PLATINUM, // top 10% players
+- GOLD, // top 25% players
+- SILVER, // top 65% players
+- BROZNE, // others
 
 설계 고려 사항
 ---
