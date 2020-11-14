@@ -4,8 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.Date;
-
 @Getter
 @Setter
 @ToString
@@ -35,5 +33,10 @@ public class UserDTO {
         this.matchMakerRank = matchMakerRank;
         this.rank = rank;
         this.tier = tier;
+    }
+
+    public static boolean hasNullDataBeforeSignup(UserDTO userDTO) {
+        return userDTO.getId() == 0 || userDTO.getMatchMakerRank() == 0
+                || userDTO.getRank() == 0 || userDTO.getTier() == null;
     }
 }
