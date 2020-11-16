@@ -8,8 +8,11 @@
 ---
 - Maven Project
 - Java 8
-- Junit 4
+- Junit
 - assertj
+- Swagger
+- h2 database
+- mysql
 
 기술적인 집중 요소
 ---
