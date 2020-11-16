@@ -8,8 +8,11 @@
 ---
 - Maven Project
 - Java 8
-- Junit 4
+- Junit
 - assertj
+- Swagger
+- h2 database
+- mysql
 
 기술적인 집중 요소
 ---
@@ -30,23 +33,34 @@ REST API 사양
 플레이어 모델은
 - long playerId
 - int mmr
-- 정수 순위
-- enum 계층
+- int rank
+- Tier tier
 
 계층 모델은 다음으로 구성됩니다.
-- CHALLENGER // 상위 100 명의 플레이어
-- 마스터, // 상위 1 % 플레이어
-- 다이아몬드, // 상위 5 % 플레이어
-- PLATINUM, // 상위 10 % 플레이어
-- 골드, // 상위 25 % 플레이어
-- SILVER, // 상위 65 % 플레이어
-- BROZNE, // 기타
+- CHALLENGER // top 100 players
+- MASTER, // top 1% players
+- DIAMOND, // top 5% players
+- PLATINUM, // top 10% players
+- GOLD, // top 25% players
+- SILVER, // top 65% players
+- BROZNE, // others
 
 설계 고려 사항
 ---
+InitialData.txt 로드 후 DB insert시 userID가 존재한다면 데이터 갱신하고 없다면 insert
+순위 및 티어 변동 시 전체 데이터 재갱신 되게 stream api를 이용해서 sorting 후 데이터 처리
+Mockito Framework를 활용하여 고립된 테스트 코드를 작성
 
 실행 방법
 ---
+압축파일 해제 후 leaderboard\target 경로에서 java -jar leaderboard-0.0.1-SNAPSHOT.jar (jre or jdk 필요)
+http://localhost:8080/swagger-ui.html#/users (Swagger를 통해 API 확인 가능) 
+
+DB 데이터 확인 방법
+---
+http://localhost:8080/h2-console/ 접속 후
+setting 값을 Generic h2 (embedded)
+JDBC url 값을 jdbc:h2:~/board 접속
 
 ERD
 ---
