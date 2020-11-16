@@ -44,9 +44,20 @@ REST API 사양
 
 설계 고려 사항
 ---
+InitialData.txt 로드 후 DB insert시 userID가 존재한다면 데이터 갱신하고 없다면 insert
+순위 및 티어 변동 시 전체 데이터 재갱신 되게 stream api를 이용해서 sorting 후 데이터 처리
+Mockito Framework를 활용하여 고립된 테스트 코드를 작성
 
 실행 방법
 ---
+압축파일 해제 후 readerboard\target 경로에서 java -jar readerboard-0.0.1-SNAPSHOT.jar (jre or jdk 필요)
+http://localhost:8080/swagger-ui.html#/users (Swagger를 통해 API 확인 가능) 
+
+DB 데이터 확인 방법
+---
+http://localhost:8080/h2-console/ 접속 후
+setting 값을 Generic h2 (embedded)
+JDBC url 값을 jdbc:h2:~/board 접속
 
 ERD
 ---
