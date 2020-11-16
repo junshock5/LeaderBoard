@@ -1,8 +1,8 @@
-package com.riotgames.readerboard.service;
+package com.riotgames.leaderboard.service;
 
-import com.riotgames.readerboard.dto.UserDTO;
-import com.riotgames.readerboard.exception.DuplicateIdException;
-import com.riotgames.readerboard.mapper.UserMapper;
+import com.riotgames.leaderboard.dto.UserDTO;
+import com.riotgames.leaderboard.exception.DuplicateIdException;
+import com.riotgames.leaderboard.mapper.UserMapper;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

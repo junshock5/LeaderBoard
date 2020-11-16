@@ -1,7 +1,7 @@
-package com.riotgames.readerboard.controller;
+package com.riotgames.leaderboard.controller;
 
-import com.riotgames.readerboard.dto.UserDTO;
-import com.riotgames.readerboard.service.UserService;
+import com.riotgames.leaderboard.dto.UserDTO;
+import com.riotgames.leaderboard.service.UserService;
 import io.swagger.annotations.Api;
 import lombok.*;
 import lombok.extern.log4j.Log4j2;

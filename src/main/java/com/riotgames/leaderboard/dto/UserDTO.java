@@ -1,4 +1,4 @@
-package com.riotgames.readerboard.dto;
+package com.riotgames.leaderboard.dto;
 
 import lombok.Builder;
 import lombok.Getter;

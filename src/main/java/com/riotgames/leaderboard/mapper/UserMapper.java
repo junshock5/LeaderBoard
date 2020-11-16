@@ -1,6 +1,6 @@
-package com.riotgames.readerboard.mapper;
+package com.riotgames.leaderboard.mapper;
 
-import com.riotgames.readerboard.dto.UserDTO;
+import com.riotgames.leaderboard.dto.UserDTO;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.riotgames.readerboard.config;
+package com.riotgames.leaderboard.config;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 
 @Configuration
-@MapperScan(basePackages = "com.riotgames.readerboard")
+@MapperScan(basePackages = "com.riotgames.leaderboard")
 @EnableTransactionManagement // DataSourceTransactionManager Bean을 Transaction Manager로 사용
 public class DatabaseConfig {
 
@@ -23,7 +23,7 @@ public class DatabaseConfig {
         sessionFactory.setDataSource(dataSource);
 
         // TypeAlias로 설정할 클래스들이 있는 패키지를 설정하면 DTO에 @Alias("aliasName")으로 typeAlias를 설정 가능
-        sessionFactory.setTypeAliasesPackage("com.riotgames.readerboard.dto.");
+        sessionFactory.setTypeAliasesPackage("com.riotgames.leaderboard.dto.");
 
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         sessionFactory.setMapperLocations(resolver.getResources("classpath:mybatis/mapper/*.xml"));

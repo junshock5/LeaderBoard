@@ -1,7 +1,7 @@
-package com.riotgames.readerboard.service;
+package com.riotgames.leaderboard.service;
 
-import com.riotgames.readerboard.dto.UserDTO;
-import com.riotgames.readerboard.mapper.UserMapper;
+import com.riotgames.leaderboard.dto.UserDTO;
+import com.riotgames.leaderboard.mapper.UserMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

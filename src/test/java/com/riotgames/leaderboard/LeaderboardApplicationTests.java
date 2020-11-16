@@ -1,10 +1,10 @@
-package com.riotgames.readerboard;
+package com.riotgames.leaderboard;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ReaderboardApplicationTests {
+class LeaderboardApplicationTests {
 
 	@Test
 	void contextLoads() {

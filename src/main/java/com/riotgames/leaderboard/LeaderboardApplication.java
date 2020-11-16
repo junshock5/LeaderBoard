@@ -1,13 +1,13 @@
-package com.riotgames.readerboard;
+package com.riotgames.leaderboard;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ReaderboardApplication {
+public class leaderboardApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ReaderboardApplication.class, args);
+		SpringApplication.run(leaderboardApplication.class, args);
 	}
 
 }
