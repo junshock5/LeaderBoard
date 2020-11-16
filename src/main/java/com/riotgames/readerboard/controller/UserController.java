@@ -65,7 +65,7 @@ public class UserController {
     /**
      * 회원 전체 수 반환 메서드.
      */
-    @GetMapping("")
+    @GetMapping("totalCount")
     public long totalCount() {
         try {
             return userService.totalCount();

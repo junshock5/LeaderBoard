@@ -40,4 +40,12 @@
         FROM user
     </select>
 
+    <select id="totalUsers" resultType="com.riotgames.readerboard.dto.UserDTO">
+        SELECT `id`,
+        `matchMakerRank`,
+        `rank`,
+        `tier`
+        FROM `user`
+    </select>
+
 </mapper>
