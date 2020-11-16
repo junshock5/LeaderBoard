@@ -48,6 +48,10 @@ REST API 사양
 실행 방법
 ---
 
+ERD
+---
+![image](https://user-images.githubusercontent.com/61732452/99238175-c6007680-283c-11eb-8a34-3fe19ab4c2a5.png)
+
 참고
 ---
 ### **Java8 표준 라이브러리 주소** <br/> https://docs.oracle.com/javase/8/docs/api/
