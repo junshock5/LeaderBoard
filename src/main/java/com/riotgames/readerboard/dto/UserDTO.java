@@ -1,5 +1,6 @@
 package com.riotgames.readerboard.dto;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -25,9 +26,7 @@ public class UserDTO {
     private int rank;
     private Tier tier;
 
-    public UserDTO(){
-    }
-
+    @Builder
     public UserDTO(long id, int matchMakerRank, int rank, Tier tier) {
         this.id = id;
         this.matchMakerRank = matchMakerRank;

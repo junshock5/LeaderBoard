@@ -16,6 +16,12 @@
         WHERE id = #{id}
     </select>
 
+    <select id="getUserMatchMakerRank" resultType="int">
+        SELECT matchMakerRank
+        FROM user
+        WHERE id = #{id}
+    </select>
+
     <delete id="deleteUserProfile">
         DELETE FROM user
         WHERE id=#{id}

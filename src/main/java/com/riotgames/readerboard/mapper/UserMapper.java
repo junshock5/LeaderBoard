@@ -13,5 +13,7 @@ public interface UserMapper {
 
     int idCheck(long id);
 
+    int getUserMatchMakerRank(long id);
+
     public int updateUser(UserDTO userDTO);
 }
