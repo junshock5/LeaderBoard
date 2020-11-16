@@ -62,6 +62,20 @@ public class UserController {
         return HttpStatus.OK;
     }
 
+    /**
+     * 회원 전체 수 반환 메서드.
+     */
+    @GetMapping("")
+    public long totalCount() {
+        try {
+            return userService.totalCount();
+        } catch (RuntimeException e) {
+            log.info("totalCount 실패", e);
+        }
+        return 0;
+    }
+
+
     // -------------- request 객체 --------------
 
     @Setter

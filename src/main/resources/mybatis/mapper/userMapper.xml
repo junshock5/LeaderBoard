@@ -35,4 +35,9 @@
         WHERE id= #{id}
     </update>
 
+    <select id="totalCount" resultType="long">
+        SELECT COUNT(id)
+        FROM user
+    </select>
+
 </mapper>

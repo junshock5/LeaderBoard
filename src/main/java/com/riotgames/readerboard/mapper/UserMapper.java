@@ -16,4 +16,6 @@ public interface UserMapper {
     int getUserMatchMakerRank(long id);
 
     public int updateUser(UserDTO userDTO);
+
+    long totalCount();
 }

@@ -58,4 +58,9 @@ public class UserService {
     public boolean isDuplicatedId(long id) {
         return userMapper.idCheck(id) == 1;
     }
+
+    public long totalCount() {
+        return userMapper.totalCount();
+    }
+
 }
