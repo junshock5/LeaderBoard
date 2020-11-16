@@ -22,6 +22,15 @@
         WHERE id = #{id}
     </select>
 
+    <select id="getUserProfile" resultType="com.riotgames.readerboard.dto.UserDTO">
+        SELECT id,
+        matchMakerRank,
+        rank,
+        tier
+        FROM user
+        WHERE id = #{id}
+    </select>
+
     <delete id="deleteUserProfile">
         DELETE FROM user
         WHERE id=#{id}
@@ -41,11 +50,38 @@
     </select>
 
     <select id="totalUsers" resultType="com.riotgames.readerboard.dto.UserDTO">
-        SELECT `id`,
-        `matchMakerRank`,
-        `rank`,
-        `tier`
-        FROM `user`
+        SELECT id,
+        matchMakerRank,
+        rank,
+        tier
+        FROM user
+    </select>
+
+    <select id="getUserTier" resultType="String">
+        SELECT tier
+        FROM user
+        WHERE id = #{id}
+    </select>
+
+    <select id="top10" resultType="com.riotgames.readerboard.dto.UserDTO">
+        SELECT id,
+        matchMakerRank,
+        rank,
+        tier
+        FROM user
+        ORDER BY rank
+        LIMIT 10
+    </select>
+
+    <select id="getUsersRangeByIdAndInterval" resultType="com.riotgames.readerboard.dto.UserDTO">
+        SELECT id,
+        matchMakerRank,
+        rank,
+        tier
+        FROM user
+        WHERE rank
+        BETWEEN #{rank}-#{interval} AND #{rank}+#{interval}
+        ORDER BY rank
     </select>
 
 </mapper>

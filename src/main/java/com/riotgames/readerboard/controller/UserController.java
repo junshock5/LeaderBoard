@@ -8,6 +8,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Api(tags = {"users"})
 @RestController
 @RequestMapping("/users")
@@ -73,6 +75,45 @@ public class UserController {
             log.info("totalCount 실패", e);
         }
         return 0;
+    }
+
+    /**
+     * 회원 계층 반환
+     */
+    @GetMapping("userTier")
+    public String getUserTier(long id) {
+        try {
+            return userService.getUserTier(id);
+        } catch (RuntimeException e) {
+            log.info("getUserTier 실패", e);
+        }
+        return null;
+    }
+
+    /**
+     * 회원 상위 10명 반환
+     */
+    @GetMapping("top10")
+    public List<UserDTO> top10() {
+        try {
+            return userService.top10();
+        } catch (RuntimeException e) {
+            log.info("top10 실패", e);
+        }
+        return null;
+    }
+
+    /**
+     * 특정 회원 특정 범위 interval 반환
+     */
+    @GetMapping("rangeByRankAndInterval")
+    public List<UserDTO> rangeByRankAndInterval(long id,int interval) {
+        try {
+            return userService.getUsersRangeByIdAndInterval(id,interval);
+        } catch (RuntimeException e) {
+            log.info("rangeByRankAndInterval 실패", e);
+        }
+        return null;
     }
 
 

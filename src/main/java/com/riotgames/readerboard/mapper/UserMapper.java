@@ -22,4 +22,10 @@ public interface UserMapper {
     long totalCount();
 
     List<UserDTO> totalUsers();
+
+    String getUserTier(long id);
+
+    List<UserDTO> top10();
+
+    List<UserDTO> getUsersRangeByIdAndInterval(int rank, int interval);
 }
