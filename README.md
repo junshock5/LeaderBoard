@@ -53,14 +53,17 @@ Mockito Framework를 활용하여 고립된 테스트 코드를 작성
 
 실행 방법
 ---
-압축파일 해제 후 leaderboard\target 경로에서 java -jar leaderboard-0.0.1-SNAPSHOT.jar (jre or jdk 필요)
-http://localhost:8080/swagger-ui.html#/users (Swagger를 통해 API 확인 가능) 
+압축파일 해제 후 leaderboard\target 경로에서 아래 명령어 실행 (jre or jdk 필요)
+java -jar leaderboard-0.0.1-SNAPSHOT.jar
+
+아래 url 접근시 swagger 를통해 API 확인
+http://localhost:8080/swagger-ui.html#/users 
 
 DB 데이터 확인 방법
 ---
 http://localhost:8080/h2-console/ 접속 후
-setting 값을 Generic h2 (embedded)
-JDBC url 값을 jdbc:h2:~/board 접속
+setting 값을 Generic h2 (embedded) 설정
+JDBC url 값을 jdbc:h2:~/board 접속 후 확인
 
 ERD
 ---
