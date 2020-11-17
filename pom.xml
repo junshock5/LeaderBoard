@@ -9,14 +9,14 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.riotgames</groupId>
-    <artifactId>readerboard</artifactId>
+    <artifactId>leaderboard</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>readerBoard</name>
-    <description>Spring Boot project for readerBoard</description>
+    <name>leaderBoard</name>
+    <description>Spring Boot project for leaderBoard</description>
 
     <properties>
         <java.version>1.8</java.version>
-        <start-class>com.riotgames.readerboard.ReaderboardApplication</start-class>
+        <start-class>com.riotgames.leaderboard.LeaderboardApplication</start-class>
     </properties>
 
     <dependencies>

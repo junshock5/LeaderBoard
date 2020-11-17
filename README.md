@@ -1,4 +1,4 @@
-# readerboard
+# leaderboard
 목적
 ---
 - ### 리그 오브 레전드를위한 간단한 리더 보드 백엔드 애플리케이션 작성
@@ -53,7 +53,7 @@ Mockito Framework를 활용하여 고립된 테스트 코드를 작성
 
 실행 방법
 ---
-압축파일 해제 후 readerboard\target 경로에서 java -jar readerboard-0.0.1-SNAPSHOT.jar (jre or jdk 필요)
+압축파일 해제 후 leaderboard\target 경로에서 java -jar leaderboard-0.0.1-SNAPSHOT.jar (jre or jdk 필요)
 http://localhost:8080/swagger-ui.html#/users (Swagger를 통해 API 확인 가능) 
 
 DB 데이터 확인 방법

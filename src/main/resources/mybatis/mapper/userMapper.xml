@@ -3,9 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.riotgames.readerboard.mapper.UserMapper">
+<mapper namespace="com.riotgames.leaderboard.mapper.UserMapper">
 
-    <insert id="register" parameterType="com.riotgames.readerboard.dto.UserDTO">
+    <insert id="register" parameterType="com.riotgames.leaderboard.dto.UserDTO">
         INSERT INTO user ( id, matchMakerRank, rank, tier )
         VALUES ( #{id}, #{matchMakerRank}, #{rank}, #{tier})
     </insert>
@@ -22,7 +22,7 @@
         WHERE id = #{id}
     </select>
 
-    <select id="getUserProfile" resultType="com.riotgames.readerboard.dto.UserDTO">
+    <select id="getUserProfile" resultType="com.riotgames.leaderboard.dto.UserDTO">
         SELECT id,
         matchMakerRank,
         rank,
@@ -36,7 +36,7 @@
         WHERE id=#{id}
     </delete>
 
-    <update id="updateUser" parameterType="com.riotgames.readerboard.dto.UserDTO">
+    <update id="updateUser" parameterType="com.riotgames.leaderboard.dto.UserDTO">
         UPDATE user
         SET matchMakerRank = #{matchMakerRank},
         rank = #{rank},
@@ -49,7 +49,7 @@
         FROM user
     </select>
 
-    <select id="totalUsers" resultType="com.riotgames.readerboard.dto.UserDTO">
+    <select id="totalUsers" resultType="com.riotgames.leaderboard.dto.UserDTO">
         SELECT id,
         matchMakerRank,
         rank,
@@ -63,7 +63,7 @@
         WHERE id = #{id}
     </select>
 
-    <select id="top10" resultType="com.riotgames.readerboard.dto.UserDTO">
+    <select id="top10" resultType="com.riotgames.leaderboard.dto.UserDTO">
         SELECT id,
         matchMakerRank,
         rank,
@@ -73,7 +73,7 @@
         LIMIT 10
     </select>
 
-    <select id="getUsersRangeByIdAndInterval" resultType="com.riotgames.readerboard.dto.UserDTO">
+    <select id="getUsersRangeByIdAndInterval" resultType="com.riotgames.leaderboard.dto.UserDTO">
         SELECT id,
         matchMakerRank,
         rank,
