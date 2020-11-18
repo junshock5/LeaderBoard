@@ -23,7 +23,7 @@ public interface UserMapper {
 
     List<UserDTO> totalUsers();
 
-    String getUserTier(long id);
+    int getUserRank(long id);
 
     List<UserDTO> top10();
 

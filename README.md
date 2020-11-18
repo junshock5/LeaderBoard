@@ -53,13 +53,22 @@ REST API 사양
 ---
 - InitialData.txt 로드 후 DB insert시 userID가 존재한다면 데이터 갱신하고 없다면 insert
 - 순위 및 티어 변동 시 전체 데이터 재갱신 되게 stream api를 이용해서 sorting 후 데이터 처리
+- 티어의 경우 db에 저장하지 않고 rank값 기준으로 계산 후 리턴
 - Mockito Framework를 활용하여 고립된 테스트 코드를 작성
 
 실행 방법
 ---
-- leaderboard.7z 압축 파일 해제 후 leaderboard\target 경로에서 아래 명령어 실행 (jre or jdk 필요)
-- java -jar leaderboard-0.0.1-SNAPSHOT.jar
+```
+- leaderboard.7z 압축 파일 해제
+- cd leaderboard/target 경로 이동 
+- leaderboard/target 경로에서 아래 명령어 실행 (jre or jdk 필요)
+- java -jar leaderboard-0.0.1-SNAPSHOT.jar 실행
 
+- mvn test package 시 target 파일에 InitialData.txt 복사 해야 정상 구동 됩니다.
+```
+
+API 확인 방법
+---
 - url 접근시 swagger 를통해 API 확인
 - http://localhost:8080/swagger-ui.html#/users 
 
@@ -71,7 +80,7 @@ DB 데이터 확인 방법
 
 ERD
 ---
-![image](https://user-images.githubusercontent.com/61732452/99238175-c6007680-283c-11eb-8a34-3fe19ab4c2a5.png)
+![2020-11-18 14;38;31](https://user-images.githubusercontent.com/61732452/99489769-ccf9c700-29ab-11eb-9d34-f4be97fc436e.PNG)
 
 참고
 ---

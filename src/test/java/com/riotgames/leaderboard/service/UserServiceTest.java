@@ -18,8 +18,11 @@ import static org.mockito.BDDMockito.given;
 @AutoConfigureMockMvc
 public class UserServiceTest {
 
-    @InjectMocks
+    @Mock
     UserService userService;
+
+    @InjectMocks
+    UserService injectUserService;
 
     @Mock
     UserMapper userMapper;
@@ -31,7 +34,6 @@ public class UserServiceTest {
                 .id(1)
                 .matchMakerRank(3500)
                 .rank(1)
-                .tier(UserDTO.Tier.CHALLENGER)
                 .build();
         return userDTO;
     }
@@ -45,7 +47,6 @@ public class UserServiceTest {
                     .id(i)
                     .matchMakerRank(3500 + i)
                     .rank(i)
-                    .tier(UserDTO.Tier.CHALLENGER)
                     .build();
             userDTOList.add(userDTO);
         }
@@ -57,32 +58,34 @@ public class UserServiceTest {
     public void testGetUserInfo() {
         UserDTO userDTO = generateUser();
         given(userMapper.getUserProfile(1)).willReturn(userDTO);
+        assertNull(userMapper.getUserProfile(0));
         assertTrue(!userMapper.getUserProfile(1).equals(null));
-        assertTrue(UserDTO.Tier.CHALLENGER == userDTO.getTier());
     }
 
     @Test
-    @DisplayName("가상 유저 생성 후 mapper 이용해 정상 삽입 되는지 test")
+    @DisplayName("가상 유저 생성 후 mapper 이용해 정상 삽입 되는지 test, 해당 객체가 같은지 확인")
     public void testRegister() {
         UserDTO userDTO = generateUser();
+        given(userService.getUserInfo(userDTO.getId()))
+                .willReturn(userDTO);
         try {
-            userMapper.register(userDTO);
+            userService.register(userDTO);
         } catch (Exception e) {
             fail("Should not have thrown any exception");
         }
+        assertEquals(userDTO, userService.getUserInfo(1));
     }
 
     @Test
     @DisplayName("가상 유저 생성 후 mapper 이용해 정상 수정 되는지 test")
     public void testUpdateUser() {
         UserDTO userDTO = generateUser();
-        userDTO.setMatchMakerRank(333);
         try {
             userService.updateUser(userDTO);
         } catch (Exception e) {
             fail("Should not have thrown any exception");
         }
-        assertTrue(333 == userDTO.getMatchMakerRank());
+        assertTrue(3500 == userDTO.getMatchMakerRank());
     }
 
     @Test
@@ -101,7 +104,7 @@ public class UserServiceTest {
     @DisplayName("가상 유저 생성 후 ID 값이 중복 되는지 test")
     public void testIsDuplicatedId() {
         UserDTO userDTO = generateUser();
-        assertFalse(userService.isDuplicatedId(userDTO.getId()) == true);
+        assertFalse(userService.isDuplicatedId(userDTO.getId()));
     }
 
     @Test
@@ -118,18 +121,16 @@ public class UserServiceTest {
     @DisplayName("가상 유저 생성 후 순위 변경 후 값이 같은지 test")
     public void testUpdateRank() {
         UserDTO userDTO = generateUser();
-        userDTO.setRank(100);
         userMapper.updateUser(userDTO);
-        assertEquals(100, userDTO.getRank());
+        assertEquals(1, userDTO.getRank());
     }
 
     @Test
     @DisplayName("가상 유저 생성 후 티어 변경 후 값이 같은지 test")
     public void testGetUserTier() {
         UserDTO userDTO = generateUser();
-        userDTO.setTier(UserDTO.Tier.DIAMOND);
         userMapper.updateUser(userDTO);
-        assertEquals(UserDTO.Tier.DIAMOND, userDTO.getTier());
+        assertEquals(UserDTO.Tier.CHALLENGER.toString(), injectUserService.getUserTier(userDTO.getId()));
     }
 
     @Test
@@ -142,5 +143,6 @@ public class UserServiceTest {
         } catch (Exception e) {
             fail("Should not have thrown any exception");
         }
+        assertEquals(20,userMapper.getUsersRangeByIdAndInterval(5, 3).size());
     }
 }

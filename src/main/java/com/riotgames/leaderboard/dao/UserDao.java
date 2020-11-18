@@ -29,11 +29,7 @@ public class UserDao {
         loadInitialData();
     }
 
-    @PreDestroy
-    public void destory() {
-    }
-
-    public void loadInitialData() throws IOException {
+    private void loadInitialData() throws IOException {
         try (BufferedReader in = new BufferedReader(new FileReader(FILE_DIRECTORY_NAME + "InitialData.txt"))) {
             Map<Long, Integer> userMap = new HashMap<Long, Integer>();
             String line;
@@ -49,28 +45,10 @@ public class UserDao {
 
             int i = 1;
             for (Long key : keySetList) {
-                UserDTO.Tier tier;
-                if (i <= 100) {
-                    tier = UserDTO.Tier.CHALLENGER;
-                } else if ((double)i / (double)userMap.size() * 100 <= 1) {
-                    tier = UserDTO.Tier.MASTER;
-                } else if ((double)i / (double)userMap.size() * 100 <= 5 && (double)i / (double)userMap.size() * 100 > 1) {
-                    tier = UserDTO.Tier.DIAMOND;
-                } else if ((double)i / (double)userMap.size() * 100 <= 10 && (double)i / (double)userMap.size() * 100 > 5) {
-                    tier = UserDTO.Tier.PLATINUM;
-                } else if ((double)i / (double)userMap.size() * 100 <= 25 && (double)i / (double)userMap.size() * 100 > 10) {
-                    tier = UserDTO.Tier.GOLD;
-                } else if ((double)i / (double)userMap.size() * 100 <= 65 && (double)i / (double)userMap.size() * 100 > 25) {
-                    tier = UserDTO.Tier.SILVER;
-                } else {
-                    tier = UserDTO.Tier.BROZNE;
-                }
-
                 UserDTO userDTO = UserDTO.builder()
                         .id(key)
                         .matchMakerRank(userMap.get(key))
                         .rank(i++)
-                        .tier(tier)
                         .build();
 
                 if (userMapper.idCheck(key) == 1) { // 이미 있는 id이기 때때문에 mmr값이 같은지 확인고 없다면 update

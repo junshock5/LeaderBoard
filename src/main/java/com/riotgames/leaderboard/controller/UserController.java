@@ -14,41 +14,37 @@ import java.util.List;
 @RestController
 @RequestMapping("/users")
 @Log4j2
+@RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
-
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     /**
      * 회원 추가 메서드.
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public HttpStatus signUp(@RequestBody UserDTO userDTO) {
+    public void signUp(@RequestBody UserDTO userDTO) {
         if (UserDTO.hasNullDataBeforeSignup(userDTO)) {
-            throw new NullPointerException("회원 추가시 필수 데이터를 모두 입력해야 합니다.");
+            throw new NullPointerException("회원 추가시 필수 데이터를 모두 입력 해야 합니다.");
         }
         userService.register(userDTO);
-        return HttpStatus.OK;
     }
 
     /**
      * 회원 수정 메서드.
      */
     @PatchMapping("{userId}")
-    public HttpStatus updateAddress(@RequestBody UserUpdateRequest userUpdateRequest) {
+    public void updateAddress(@RequestBody UserUpdateRequest userUpdateRequest) {
         long Id = 0;
         UserDTO userDTO  = userUpdateRequest.getUserDTO();
 
         try {
             userService.updateUser(userDTO);
-        } catch (RuntimeException e) {
-            log.info("updateUser 실패", e);
+        } catch (NullPointerException e) {
+            log.error("updateUser 실패", e);
+            throw new RuntimeException("update ERROR! updateAddress 메서드를 확인해주세요\n" + "Params : " + userDTO);
         }
-        return HttpStatus.OK;
     }
 
     /**
@@ -116,10 +112,6 @@ public class UserController {
         return null;
     }
 
-
-    // -------------- request 객체 --------------
-
-    @Setter
     @Getter
     private static class UserUpdateRequest {
         @NonNull

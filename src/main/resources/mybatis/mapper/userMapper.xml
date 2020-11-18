@@ -6,8 +6,8 @@
 <mapper namespace="com.riotgames.leaderboard.mapper.UserMapper">
 
     <insert id="register" parameterType="com.riotgames.leaderboard.dto.UserDTO">
-        INSERT INTO user ( id, matchMakerRank, rank, tier )
-        VALUES ( #{id}, #{matchMakerRank}, #{rank}, #{tier})
+        INSERT INTO user ( id, matchMakerRank, rank )
+        VALUES ( #{id}, #{matchMakerRank}, #{rank})
     </insert>
 
     <select id="idCheck" resultType="int">
@@ -25,8 +25,7 @@
     <select id="getUserProfile" resultType="com.riotgames.leaderboard.dto.UserDTO">
         SELECT id,
         matchMakerRank,
-        rank,
-        tier
+        rank
         FROM user
         WHERE id = #{id}
     </select>
@@ -39,8 +38,7 @@
     <update id="updateUser" parameterType="com.riotgames.leaderboard.dto.UserDTO">
         UPDATE user
         SET matchMakerRank = #{matchMakerRank},
-        rank = #{rank},
-        tier = #{tier}
+        rank = #{rank}
         WHERE id= #{id}
     </update>
 
@@ -52,13 +50,12 @@
     <select id="totalUsers" resultType="com.riotgames.leaderboard.dto.UserDTO">
         SELECT id,
         matchMakerRank,
-        rank,
-        tier
+        rank
         FROM user
     </select>
 
-    <select id="getUserTier" resultType="String">
-        SELECT tier
+    <select id="getUserRank" resultType="int">
+        SELECT rank
         FROM user
         WHERE id = #{id}
     </select>
@@ -66,8 +63,7 @@
     <select id="top10" resultType="com.riotgames.leaderboard.dto.UserDTO">
         SELECT id,
         matchMakerRank,
-        rank,
-        tier
+        rank
         FROM user
         ORDER BY rank
         LIMIT 10
@@ -76,8 +72,7 @@
     <select id="getUsersRangeByIdAndInterval" resultType="com.riotgames.leaderboard.dto.UserDTO">
         SELECT id,
         matchMakerRank,
-        rank,
-        tier
+        rank
         FROM user
         WHERE rank
         BETWEEN #{rank}-#{interval} AND #{rank}+#{interval}

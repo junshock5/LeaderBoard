@@ -2,11 +2,9 @@ package com.riotgames.leaderboard.dto;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 @Getter
-@Setter
 @ToString
 public class UserDTO {
 
@@ -24,18 +22,16 @@ public class UserDTO {
     private long id;
     private int matchMakerRank;
     private int rank;
-    private Tier tier;
 
     @Builder
-    public UserDTO(long id, int matchMakerRank, int rank, Tier tier) {
+    public UserDTO(long id, int matchMakerRank, int rank) {
         this.id = id;
         this.matchMakerRank = matchMakerRank;
         this.rank = rank;
-        this.tier = tier;
     }
 
     public static boolean hasNullDataBeforeSignup(UserDTO userDTO) {
         return userDTO.getId() == 0 || userDTO.getMatchMakerRank() == 0
-                || userDTO.getRank() == 0 || userDTO.getTier() == null;
+                || userDTO.getRank() == 0;
     }
 }
