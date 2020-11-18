@@ -32,13 +32,15 @@ REST API 사양
 5. 플레이어를 업데이트 / 추가하는 API (리더 보드도 업데이트해야 함)
 6. 플레이어 삭제 API
 
-- 플레이어 모델
+플레이어 모델
+---
 - long playerId
 - int mmr
 - int rank
 - Tier tier
 
-- 계층 모델
+계층 모델
+---
 - CHALLENGER // top 100 players
 - MASTER, // top 1% players
 - DIAMOND, // top 5% players
