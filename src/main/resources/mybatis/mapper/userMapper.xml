@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.riotgames.leaderboard.mapper.UserMapper">
+
+    <insert id="register" parameterType="com.riotgames.leaderboard.dto.UserDTO">
+        INSERT INTO user ( id, matchMakerRank, rank )
+        VALUES ( #{id}, #{matchMakerRank}, #{rank})
+    </insert>
+
+    <select id="idCheck" resultType="int">
+        SELECT COUNT(id)
+        FROM user
+        WHERE id = #{id}
+    </select>
+
+    <select id="getUserMatchMakerRank" resultType="int">
+        SELECT matchMakerRank
+        FROM user
+        WHERE id = #{id}
+    </select>
+
+    <select id="getUserProfile" resultType="com.riotgames.leaderboard.dto.UserDTO">
+        SELECT id,
+        matchMakerRank,
+        rank
+        FROM user
+        WHERE id = #{id}
+    </select>
+
+    <delete id="deleteUserProfile">
+        DELETE FROM user
+        WHERE id=#{id}
+    </delete>
+
+    <update id="updateUser" parameterType="com.riotgames.leaderboard.dto.UserDTO">
+        UPDATE user
+        SET matchMakerRank = #{matchMakerRank},
+        rank = #{rank}
+        WHERE id= #{id}
+    </update>
+
+    <select id="totalCount" resultType="long">
+        SELECT COUNT(id)
+        FROM user
+    </select>
+
+    <select id="totalUsers" resultType="com.riotgames.leaderboard.dto.UserDTO">
+        SELECT id,
+        matchMakerRank,
+        rank
+        FROM user
+    </select>
+
+    <select id="getUserRank" resultType="int">
+        SELECT rank
+        FROM user
+        WHERE id = #{id}
+    </select>
+
+    <select id="top10" resultType="com.riotgames.leaderboard.dto.UserDTO">
+        SELECT id,
+        matchMakerRank,
+        rank
+        FROM user
+        ORDER BY rank
+        LIMIT 10
+    </select>
+
+    <select id="getUsersRangeByIdAndInterval" resultType="com.riotgames.leaderboard.dto.UserDTO">
+        SELECT id,
+        matchMakerRank,
+        rank
+        FROM user
+        WHERE rank
+        BETWEEN #{rank}-#{interval} AND #{rank}+#{interval}
+        ORDER BY rank
+    </select>
+
+</mapper>
