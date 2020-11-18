@@ -35,7 +35,7 @@ public class UserController {
      * 회원 수정 메서드.
      */
     @PatchMapping("{userId}")
-    public void updateAddress(@RequestBody UserUpdateRequest userUpdateRequest) {
+    public HttpStatus updateAddress(@RequestBody UserUpdateRequest userUpdateRequest) {
         long Id = 0;
         UserDTO userDTO  = userUpdateRequest.getUserDTO();
 
@@ -43,8 +43,9 @@ public class UserController {
             userService.updateUser(userDTO);
         } catch (NullPointerException e) {
             log.error("updateUser 실패", e);
-            throw new RuntimeException("update ERROR! updateAddress 메서드를 확인해주세요\n" + "Params : " + userDTO);
+            return HttpStatus.BAD_REQUEST;
         }
+        return HttpStatus.OK;
     }
 
     /**

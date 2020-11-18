@@ -1,9 +1,9 @@
-package com.riotgames.leaderboard.exception.user;
+package com.riotgames.leaderboard.exception;
 
 // RuntimeException: 명시적인 예외처리를 강제하지 않고 런타임 구동시 예상한 예외상황의 에러를 발생시킵니다.
-public class UpdateException extends RuntimeException {
+public class UserInsertException extends RuntimeException {
 
-  public UpdateException(String msg) {
+  public UserInsertException(String msg) {
     super(msg);
   }
   

@@ -2,16 +2,15 @@ package com.riotgames.leaderboard.service;
 
 import com.riotgames.leaderboard.dto.UserDTO;
 import com.riotgames.leaderboard.exception.DuplicateIdException;
-import com.riotgames.leaderboard.exception.user.DeleteException;
-import com.riotgames.leaderboard.exception.user.InsertException;
-import com.riotgames.leaderboard.exception.user.UpdateException;
+import com.riotgames.leaderboard.exception.UserDeleteException;
+import com.riotgames.leaderboard.exception.UserInsertException;
+import com.riotgames.leaderboard.exception.UserUpdateException;
 import com.riotgames.leaderboard.mapper.UserMapper;
+import com.riotgames.leaderboard.utils.UserUtil;
 import com.sun.istack.internal.NotNull;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -41,7 +40,7 @@ public class UserService {
 
         if (insertCount != 1) {
             log.error("insertMember ERROR! {}", userDTO);
-            throw new InsertException("insertUser ERROR! 유저 추가 메서드를 확인해주세요\n" + "Params : " + userDTO);
+            throw new UserInsertException("insertUser ERROR! 유저 추가 메서드를 확인해주세요\n" + "Params : " + userDTO);
         }
         updateRank();
     }
@@ -49,9 +48,9 @@ public class UserService {
     public void updateUser(@NotNull UserDTO userDTO) {
         try {
             userMapper.updateUser(userDTO);
-        } catch (UpdateException e) {
+        } catch (UserUpdateException e) {
             log.error("updateAddress ERROR! {}", userDTO);
-            throw new UpdateException("updateAddress ERROR! 유저 변경 메서드를 확인해주세요\n" + "Params : " + userDTO);
+            throw new UserUpdateException("updateAddress ERROR! 유저 변경 메서드를 확인해주세요\n" + "Params : " + userDTO);
         }
         updateRank();
     }
@@ -61,7 +60,7 @@ public class UserService {
             userMapper.deleteUserProfile(id);
         } else {
             log.error("deleteId ERROR! {}", id);
-            throw new DeleteException("deleteId ERROR! id 삭제 메서드를 확인해주세요\n" + "Params : " + id);
+            throw new UserDeleteException("deleteId ERROR! id 삭제 메서드를 확인해주세요\n" + "Params : " + id);
         }
         updateRank();
     }
@@ -78,7 +77,7 @@ public class UserService {
         return userMapper.totalUsers();
     }
 
-    public void updateRank(){
+    public void updateRank() {
         Map<Long, Integer> userMap =
                 totalUsers().stream().collect(Collectors.toMap(UserDTO::getId, UserDTO::getMatchMakerRank));
 
@@ -108,38 +107,15 @@ public class UserService {
     }
 
     public String getUserTier(long id) {
-        return checkTierbyRank(userMapper.getUserRank(id)).toString();
+        return UserUtil.calculateTierbyRank(userMapper.getUserRank(id), userMapper.totalCount()).toString();
     }
 
     public List<UserDTO> top10() {
         return userMapper.top10();
     }
 
-    public List<UserDTO> getUsersRangeByIdAndInterval(long id,int interval) {
+    public List<UserDTO> getUsersRangeByIdAndInterval(long id, int interval) {
         int rank = userMapper.getUserProfile(id).getRank();
-        return userMapper.getUsersRangeByIdAndInterval(rank,interval);
+        return userMapper.getUsersRangeByIdAndInterval(rank, interval);
     }
-
-    private UserDTO.Tier checkTierbyRank(long rank){
-        long totalUserCount = totalCount();
-        UserDTO.Tier tier;
-        if (rank <= 100) {
-            tier = UserDTO.Tier.CHALLENGER;
-        } else if ((double)rank / (double)totalUserCount * 100 <= 1) {
-            tier = UserDTO.Tier.MASTER;
-        } else if ((double)rank / (double)totalUserCount * 100 <= 5 && (double)rank / (double)totalUserCount * 100 > 1) {
-            tier = UserDTO.Tier.DIAMOND;
-        } else if ((double)rank / (double)totalUserCount * 100 <= 10 && (double)rank / (double)totalUserCount * 100 > 5) {
-            tier = UserDTO.Tier.PLATINUM;
-        } else if ((double)rank / (double)totalUserCount * 100 <= 25 && (double)rank / (double)totalUserCount * 100 > 10) {
-            tier = UserDTO.Tier.GOLD;
-        } else if ((double)rank / (double)totalUserCount * 100 <= 65 && (double)rank / (double)totalUserCount * 100 > 25) {
-            tier = UserDTO.Tier.SILVER;
-        } else {
-            tier = UserDTO.Tier.BROZNE;
-        }
-
-        return tier;
-    }
-
 }
