@@ -60,8 +60,7 @@ REST API 사양
 ---
 ```
 - leaderboard.7z 압축 파일 해제
-- cd leaderboard/target 경로 이동 
-- leaderboard/target 경로에서 아래 명령어 실행 (jre or jdk 필요)
+- cd leaderboard/ 경로에서 아래 명령어 실행 (jre or jdk 필요)
 - java -jar leaderboard-0.0.1-SNAPSHOT.jar 실행
 
 - mvn test package 시 target 파일에 InitialData.txt 복사 해야 정상 구동 됩니다.
